@@ -20,14 +20,14 @@ async function run() {
     let myError = '';
     
     const options = {};
-    options.listeners = {
-      stdout: (data) => {
-        myOutput += data.toString();
-      },
-      stderr: (data) => {
-        myError += data.toString();
-      }
-    };
+    // options.listeners = {
+    //   stdout: (data: buffer) => {
+    //     myOutput += data.toString();
+    //   },
+    //   stderr: (data: buffer) => {
+    //     myError += data.toString();
+    //   }
+    // };
 
     core.info(`tool to check ${tool}`);
 
