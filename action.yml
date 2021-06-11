@@ -5,6 +5,10 @@ inputs:
     description: 'number of milliseconds to wait'
     required: true
     default: '1000'
+  tool:  # id of input
+    description: 'tool to check with which'
+    required: true
+    default: 'bash'
 outputs:
   time: # output will be available to future steps
     description: 'The message to output'
