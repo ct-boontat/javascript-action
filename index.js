@@ -32,8 +32,14 @@ async function run() {
     core.info(`tool to check ${tool}`);
 
     await exec.exec('which', [tool], options);
+    
+    if (myOutput.length == 0) {
+      core.info(`Tool ${tool} is not installed`);
+    } else {
+      core.info(`Good new, ${tool} is installed`);
+    }
 
-    core.info(`Here is your output ${myOutput}`);
+    
   } catch (error) {
     core.setFailed(error.message);
   }
