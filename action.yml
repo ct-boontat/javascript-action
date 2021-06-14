@@ -11,6 +11,10 @@ inputs:
     description: 'artifact output'
     required: true
     default: 'dependency-result'
+  artifactName:  # id of input
+    description: 'name of upload artifact'
+    required: true
+    default: 'dependency-scan-result'
 runs:
   using: 'node12'
   main: 'dist/index.js'
