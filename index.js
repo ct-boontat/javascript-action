@@ -31,12 +31,15 @@ async function run() {
         myError += data.toString();
       }
     };
-    await exec.exec(cmd, ['--enableExperimental', '--enableRetired', '--project', projectName, '-s', libraryPath, '-o', `./${outputPath}/result-${mark}.html`], execOptions);
+    let outputFullPath = `./${outputPath}/result-${mark}.html`;
+    await exec.exec(cmd, ['--enableExperimental', '--enableRetired', '--project', projectName, '-s', libraryPath, '-o', outputFullPath], execOptions);
     core.info(`output: ${myOutput}`);
 
     // upload artefact
     const artifactClient = artifact.create();
-    const files = [];
+    const files = [
+      outputFullPath
+    ];
     const rootDirectory = `./${outputPath}`;
     const artefactOptions = {
         continueOnError: false
