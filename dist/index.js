@@ -59,7 +59,6 @@ async function run() {
     }
 
     const uploadResponse = await artifactClient.uploadArtifact(artifactName, files, rootDirectory, artefactOptions)
-    core.info(`output: ${uploadResponse}`);
     core.info(`Action completed`);
   } catch (error) {
     core.setFailed(error.message);
