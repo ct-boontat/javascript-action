@@ -18,10 +18,14 @@ async function run() {
     let myOutput = '';
     let myError = '';
 
+    core.info(`Action Started`);
+
     // create directory
+    core.info(`Creating result directory...`);
     await io.mkdirP(outputPath);
     
     // run dependency check
+    core.info(`Starting dependency check...`);
     const execOptions = {};
     execOptions.listeners = {
       stdout: (data) => {
@@ -34,8 +38,10 @@ async function run() {
     let outputFullPath = `./${outputPath}/result-${mark}.html`;
     await exec.exec(cmd, ['--enableExperimental', '--enableRetired', '--project', projectName, '-s', libraryPath, '-o', outputFullPath], execOptions);
     core.info(`output: ${myOutput}`);
+    core.info(`Dependency check completed`);
 
     // upload artefact
+    core.info(`Uploading artefacts...`);
     const artifactClient = artifact.create();
     const files = [
       outputFullPath
@@ -47,7 +53,7 @@ async function run() {
 
     const uploadResponse = await artifactClient.uploadArtifact(artifactName, files, rootDirectory, artefactOptions)
     core.info(`output: ${uploadResponse}`);
-
+    core.info(`Action completed`);
   } catch (error) {
     core.setFailed(error.message);
   }
