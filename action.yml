@@ -7,6 +7,10 @@ inputs:
   libraryPath:  # id of input
     description: 'library folder'
     required: true
+  outputPath:  # id of input
+    description: 'artifact output'
+    required: true
+    default: 'dependency-result'
 runs:
   using: 'node12'
   main: 'dist/index.js'

@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
+const io = require('@actions/io');
 const wait = require('./wait');
 
 // most @actions toolkit packages have async methods
@@ -7,12 +8,15 @@ async function run() {
   try {
     const projectName = core.getInput('projectName');
     const libraryPath = core.getInput('libraryPath');
-    // const cmd = 'dependency-check --enableExperimental --enableRetired --project $name -s "./library/" -o "./scan-result/result-$mark.html"';
+    const outputPath = core.getInput('outputPath');
     const cmd = 'dependency-check';
     let today = new Date();
     let mark = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}_${today.getHours()}-${today.getMinutes()}-${today.getSeconds()}`;
     let myOutput = '';
     let myError = '';
+
+    // create directory
+    await io.mkdirP(outputPath);
     
     const options = {};
     options.listeners = {
@@ -24,7 +28,7 @@ async function run() {
       }
     };
 
-    await exec.exec(cmd, ['--enableExperimental', '--enableRetired', '--project', projectName, '-s', libraryPath, '-o', `./dependency-result/result-${mark}.html`], options);
+    await exec.exec(cmd, ['--enableExperimental', '--enableRetired', '--project', projectName, '-s', libraryPath, '-o', `./${outputPath}/result-${mark}.html`], options);
     
     core.info(`output: ${myOutput}`);
 
