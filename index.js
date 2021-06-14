@@ -9,7 +9,8 @@ async function run() {
     const libraryPath = core.getInput('libraryPath');
     // const cmd = 'dependency-check --enableExperimental --enableRetired --project $name -s "./library/" -o "./scan-result/result-$mark.html"';
     const cmd = 'dependency-check';
-    let mark = new Date().toTimeString();
+    let today = new Date();
+    let mark = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}_${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
     let myOutput = '';
     let myError = '';
     
