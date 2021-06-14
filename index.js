@@ -24,7 +24,7 @@ async function run() {
       }
     };
 
-    await exec.exec(cmd, ['--enableExperimental', '--enableRetired', '--project', projectName, '-s', libraryPath, '-o', `./scan-result/result-${mark}.html`], options);
+    await exec.exec(cmd, ['--enableExperimental', '--enableRetired', '--project', projectName, '-s', libraryPath, '-o', `./dependency-result/result-${mark}.html`], options);
     
     core.info(`output: ${myOutput}`);
 
