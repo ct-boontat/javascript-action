@@ -30,17 +30,10 @@ async function run() {
       }
     };
 
-    core.info(`tool to check ${tool}`);
-
     await exec.exec(cmd, ['--enableExperimental', '--enableRetired', '--project', projectName, '-s', libraryPath, '-o', `./scan-result/result-${mark}.html`], options);
     
-    if (myOutput.length == 0) {
-      core.info(`Tool ${tool} is not installed`);
-    } else {
-      core.info(`Good new, ${tool} is installed`);
-    }
+    core.info(`output: ${myOutput}`);
 
-    
   } catch (error) {
     core.setFailed(error.message);
   }
