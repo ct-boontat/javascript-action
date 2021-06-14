@@ -17,7 +17,7 @@ async function run() {
     // const cmd = 'dependency-check --enableExperimental --enableRetired --project $name -s "./library/" -o "./scan-result/result-$mark.html"';
     const cmd = 'dependency-check';
     let today = new Date();
-    let mark = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}_${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
+    let mark = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}_${today.getHours()}-${today.getMinutes()}-${today.getSeconds()}`;
     let myOutput = '';
     let myError = '';
     
