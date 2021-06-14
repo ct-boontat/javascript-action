@@ -2,20 +2,14 @@ const core = require('@actions/core');
 const exec = require('@actions/exec');
 const wait = require('./wait');
 
-
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    const tool = core.getInput('tool');
-    core.info(`Waiting ${ms} milliseconds ...`);
-
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
-
-    core.setOutput('time', new Date().toTimeString());
-
+    const projectName = core.getInput('projectName');
+    const libraryPath = core.getInput('libraryPath');
+    // const cmd = 'dependency-check --enableExperimental --enableRetired --project $name -s "./library/" -o "./scan-result/result-$mark.html"';
+    const cmd = 'dependency-check';
+    let mark = new Date().toTimeString();
     let myOutput = '';
     let myError = '';
     
@@ -31,7 +25,7 @@ async function run() {
 
     core.info(`tool to check ${tool}`);
 
-    await exec.exec('which', [tool], options);
+    await exec.exec(cmd, ['--enableExperimental', '--enableRetired', '--project', projectName, '-s', libraryPath, '-o', `./scan-result/result-${mark}.html`], options);
     
     if (myOutput.length == 0) {
       core.info(`Tool ${tool} is not installed`);
